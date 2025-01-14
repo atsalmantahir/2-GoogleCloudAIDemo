@@ -14,6 +14,10 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/path/to/your/service-account-fi
 # Get the logger
 logger = logging.getLogger(__name__)
 
+# Create the uploads directory if it doesn't exist
+UPLOAD_FOLDER = 'uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 def trim_text(text: str):
     """ Removes spaces and newline characters. """
     return text.strip().replace("\n", " ")
@@ -53,8 +57,8 @@ def analyze_document():
             logger.error("No selected file.")
             return jsonify({"error": "No selected file"}), 400
         
-        # Save the file temporarily
-        file_path = f"/tmp/{file.filename}"
+        # Save the file temporarily in the uploads folder
+        file_path = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(file_path)
         logger.info(f"File saved to {file_path}.")
 

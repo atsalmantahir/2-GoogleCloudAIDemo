@@ -22,6 +22,7 @@
     }
   ],
   "paths": {
+    "tags": "Documents",
     "/documents/analyze": {
       "post": {
         "summary": "Analyze a document using Google Document AI",
